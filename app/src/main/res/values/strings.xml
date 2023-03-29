@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Saving Time</string>
+    <string name="starting_amount">Jumlah uang awal</string>
+    <string name="monthly_contributions">Tabungan perbulan</string>
+    <string name="duration">Berapa lama (bulan)</string>
+    <string name="interest">Besar bunga (persen)</string>
+    <string name="amazing_service">Amazing (20%)</string>
+    <string name="good_service">Good (18%)</string>
+    <string name="ok_service">Okay (15%)</string>
+    <string name="round_up">Bulatkan hasilnya?</string>
+    <string name="calculate">Hitung</string>
+    <string name="tip_amount">Tip Amount: %s</string>
 </resources>
