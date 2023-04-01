@@ -25,11 +25,13 @@ class MainActivity : AppCompatActivity() {
         val monthlyContributionString = binding.monthlyContributionsEditText.text.toString()
         if (TextUtils.isEmpty(monthlyContributionString)) {
             Toast.makeText(this, R.string.invalid_monthly_contribution, Toast.LENGTH_LONG).show()
+            displayTotal(0.0)
             return
         }
         val durationInMonthString = binding.durationEditText.text.toString()
         if (TextUtils.isEmpty(durationInMonthString)) {
             Toast.makeText(this, R.string.invalid_duration, Toast.LENGTH_LONG).show()
+            displayTotal(0.0)
             return
         }
         val interestString = binding.interestEditText.text.toString()
