@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/recycler_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+    tools:context="com.example.savingtime.ui.home.HomeFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/icon_starting_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:importantForAccessibility="no"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="16dp"
+            app:srcCompat="@drawable/ic_saving"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/starting_amount"
+            app:layout_constraintBottom_toBottomOf="@id/starting_amount"
+            />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/starting_amount"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/starting_amount"
+            app:layout_constraintStart_toEndOf="@id/icon_starting_amount"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/starting_amount_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <ImageView
+            android:id="@+id/icon_monthly_contributions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:importantForAccessibility="no"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            app:srcCompat="@drawable/ic_money"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/monthly_contributions"
+            app:layout_constraintBottom_toBottomOf="@id/monthly_contributions"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/monthly_contributions"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/monthly_contributions"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="@id/starting_amount"
+            app:layout_constraintTop_toBottomOf="@id/starting_amount">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/monthly_contributions_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <ImageView
+            android:id="@+id/icon_duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:importantForAccessibility="no"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            app:srcCompat="@drawable/ic_time"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/duration"
+            app:layout_constraintBottom_toBottomOf="@id/duration"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/duration"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/duration"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="@id/monthly_contributions"
+            app:layout_constraintTop_toBottomOf="@id/monthly_contributions">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/duration_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <ImageView
+            android:id="@+id/icon_round_up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:importantForAccessibility="no"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            app:srcCompat="@drawable/ic_round_up"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/interest"
+            app:layout_constraintBottom_toBottomOf="@id/interest"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/interest"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/interest"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="@id/duration"
+            app:layout_constraintTop_toBottomOf="@id/duration">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/interest_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:maxLength="5"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/round_switch"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:checked="true"
+            android:text="@string/round_up"
+            app:layout_constraintHorizontal_bias="0.875"
+            app:layout_constraintStart_toStartOf="@id/interest"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/interest" />
+
+        <Button
+            android:id="@+id/calculate_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/calculate"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@id/round_switch"
+            app:layout_constraintStart_toStartOf="@id/round_switch"
+            app:layout_constraintTop_toBottomOf="@id/round_switch"
+            android:background="?attr/colorPrimary"/>
+
+        <TextView
+            android:id="@+id/result"
+            style="@style/Widget.SavingTime.TextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@id/calculate_button"
+            app:layout_constraintStart_toStartOf="@id/calculate_button"
+            app:layout_constraintTop_toBottomOf="@id/calculate_button"
+            tools:text="Total uang yang akan terkumpul:\n Rp.1.000.000" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
