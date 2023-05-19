@@ -142,11 +142,12 @@
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/round_switch"
-            app:layout_constraintTop_toBottomOf="@id/round_switch" />
+            app:layout_constraintTop_toBottomOf="@id/round_switch"
+            android:background="?attr/colorPrimary"/>
 
         <TextView
             android:id="@+id/result"
-            style="@style/Widget.TipTime.TextView"
+            style="@style/Widget.SavingTime.TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
