@@ -5,16 +5,25 @@ import android.text.TextUtils
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.example.savingtime.R
 import com.example.savingtime.databinding.FragmentHomeBinding
+import com.example.savingtime.db.SavingPlanDb
 import java.text.NumberFormat
 import java.util.*
+import kotlin.math.round
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-    private lateinit var recyclerView: RecyclerView
+
+    private val viewModel: HomeViewModel by lazy {
+        val db = SavingPlanDb.getInstance(requireContext())
+        val factory = HomeViewModelFactory(db.dao)
+        ViewModelProvider(this, factory)[HomeViewModel::class.java]
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +40,8 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.calculateButton.setOnClickListener { calculate() }
+
+        viewModel.getTotalAmount().observe(requireActivity(), { displayTotal(it) })
     }
 
     override fun onDestroyView() {
@@ -56,44 +67,38 @@ class HomeFragment : Fragment() {
         val interestString = binding.interestEditText.text.toString()
 
         // Define data type of the input
-        val startingAmount = startingAmountString.toDoubleOrNull()
+        var startingAmount = startingAmountString.toDoubleOrNull()
         val monthlyContribution = monthlyContributionString.toDouble()
         val durationInMonth = durationInMonthString.toInt()
-        val interest = interestString.toDoubleOrNull()
+        var interest = interestString.toDoubleOrNull()
 
-        // Define total var
-        var totalAmount : Double
         if (startingAmount == null) {
-            totalAmount = 0.0
-        } else {
-            totalAmount = startingAmount
+            startingAmount = 0.00
         }
 
-        // Calculation if interest is not applied
-        if (interest == null || interest == 0.0) {
-            for (i in 1..durationInMonth) {
-                totalAmount += monthlyContribution
-            }
-        } else { // Calculation if interest is applied
-            val monthlyInterestRate = interest / 12 / 100
-            for (i in 1..durationInMonth) {
-                totalAmount += monthlyContribution;
-                totalAmount *= (1 + monthlyInterestRate)
-            }
+        if (interest == null) {
+            interest = 0.00
         }
 
-        // Round the total to the nearest thousand
+        // Round or not
+        var rounded: Boolean = false
         if (binding.roundSwitch.isChecked) {
-            totalAmount /= 1000
-            totalAmount = kotlin.math.round(totalAmount)
-            totalAmount *= 1000
+            rounded = true
         }
 
-        // Display the total
-        displayTotal(totalAmount)
+        viewModel.calculate(
+            startingAmount,
+            monthlyContribution,
+            durationInMonth,
+            interest,
+            rounded,
+            null
+        )
     }
 
-    private fun displayTotal (total : Double) {
+    private fun displayTotal (total : Double?) {
+        if (total == null) return
+
         val localeID = Locale("in", "ID")
         val formattedTotal = NumberFormat.getCurrencyInstance(localeID).format(total)
         binding.result.text = getString(R.string.tip_amount, formattedTotal)
