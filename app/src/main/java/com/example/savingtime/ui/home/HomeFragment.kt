@@ -5,15 +5,13 @@ import android.text.TextUtils
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.RecyclerView
+import androidx.navigation.fragment.findNavController
 import com.example.savingtime.R
 import com.example.savingtime.databinding.FragmentHomeBinding
 import com.example.savingtime.db.SavingPlanDb
 import java.text.NumberFormat
 import java.util.*
-import kotlin.math.round
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
@@ -34,8 +32,32 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        setHasOptionsMenu(true)
         val view = binding.root
         return view
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.home_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.menu_saving_plan -> {
+                findNavController().navigate(
+                    R.id.action_homeFragment_to_savingPlanFragment
+                )
+                return true
+            }
+            R.id.menu_about -> {
+                findNavController().navigate(
+                    R.id.action_homeFragment_to_aboutFragment
+                )
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

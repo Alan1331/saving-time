@@ -9,6 +9,23 @@
         android:id="@+id/homeFragment"
         android:name="com.example.savingtime.ui.home.HomeFragment"
         android:label="@string/app_name"
-        tools:layout="@layout/fragment_home"/>
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_aboutFragment"
+            app:destination="@id/aboutFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_savingPlanFragment"
+            app:destination="@id/savingPlanFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.example.savingtime.ui.about.AboutFragment"
+        android:label="About Saving Time" />
+
+    <fragment
+        android:id="@+id/savingPlanFragment"
+        android:name="com.example.savingtime.ui.savingPlan.SavingPlanFragment"
+        android:label="@string/saving_plan" />
 
 </navigation>

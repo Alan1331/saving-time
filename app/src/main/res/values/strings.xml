@@ -1,17 +1,22 @@
 <resources>
     <string name="app_name">Saving Time</string>
     <string name="starting_amount">Jumlah uang awal</string>
-    <string name="monthly_contributions">Tabungan perbulan</string>
-    <string name="duration">Berapa lama (bulan)</string>
+    <string name="monthly_contributions">Jumlah setoran perbulan</string>
+    <string name="duration">Ingin menabung berapa bulan?</string>
     <string name="interest">Besar bunga (persen)</string>
-    <string name="amazing_service">Amazing (20%)</string>
-    <string name="good_service">Good (18%)</string>
-    <string name="ok_service">Okay (15%)</string>
     <string name="round_up">Bulatkan hasilnya?</string>
     <string name="calculate">Hitung</string>
     <string name="tip_amount">Total uang yang akan terkumpul: %s</string>
     <string name="invalid_monthly_contribution">Tabungan bulanan tidak boleh kosong.</string>
     <string name="invalid_duration">Durasi menabung tidak boleh kosong.</string>
+    <string name="tentang_aplikasi">Tentang Aplikasi</string>
+    <string name="saving_plan">Saving Plan</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="copyright">
+        Saving Time adalah aplikasi android untuk membuat rencana menabung atau yang kita sebut Saving Plan. Aplikasi ini dapat mempermudah Anda dalam merencanakan tabungan Anda untuk mendapatkan sesuatu yang Anda inginkan.\n\n
+        Aplikasi ini dibuat oleh seorang mahasiswa D3 RPLA di Telkom University bernama: Syekh Maulana Wijaya. Aplikasi ini dirancang untuk pengguna supaya lebih termotivasi dalam menabung.\n\n
+        Copyright © 2023 Syekh Maulana Wijaya.\n
+        All rights reserved.
+    </string>
 </resources>
