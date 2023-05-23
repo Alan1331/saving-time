@@ -29,4 +29,5 @@
     <string name="hapus_satu">Hapus Saving Plan ini?</string>
     <string name="share_button">Bagikan Aplikasi</string>
     <string name="share_message">Install aplikasi Saving Time kuy!!\nDengan aplikasi ini, masalah keuangan Anda dapat diatasi, karena aplikasi ini didesain untuk mempermudah Anda dalam menabung.\nDapatkan segera aplikasinya pada link berikut: https://github.com/Alan1331/saving-time.git</string>
+    <string name="switch_layout">Ubah tampilan</string>
 </resources>
