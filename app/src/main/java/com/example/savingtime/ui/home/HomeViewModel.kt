@@ -1,20 +1,17 @@
 package com.example.savingtime.ui.home
 
-import android.text.TextUtils
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.savingtime.R
-import com.example.savingtime.db.SavingPlanDao
 import com.example.savingtime.db.SavingPlanEntity
+import com.example.savingtime.db.SavingPlanRepository
 import com.example.savingtime.model.calculateSavingPlan
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class HomeViewModel(private val db: SavingPlanDao) : ViewModel() {
+class HomeViewModel(private val savingPlanRepository: SavingPlanRepository) : ViewModel() {
 
     private val goalsAmount = MutableLiveData<Double?>()
 
@@ -43,7 +40,7 @@ class HomeViewModel(private val db: SavingPlanDao) : ViewModel() {
 
             viewModelScope.launch {
                 withContext(Dispatchers.IO) {
-                    db.insert(savingPlan)
+                    savingPlanRepository.insert(savingPlan)
                 }
             }
         }

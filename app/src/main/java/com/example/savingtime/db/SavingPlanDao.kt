@@ -1,9 +1,7 @@
 package com.example.savingtime.db
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 
 @Dao
 interface SavingPlanDao {
@@ -16,5 +14,11 @@ interface SavingPlanDao {
 
     @Query("DELETE FROM saving_plan")
     fun clearData()
+
+    @Delete
+    fun deleteSavingPlan(savingPlan: SavingPlanEntity)
+
+    @Query("UPDATE saving_plan SET achieved_amount = (:newAmount) WHERE id = :id")
+    fun setorBulanan(id: Long, newAmount: Double)
 
 }

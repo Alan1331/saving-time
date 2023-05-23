@@ -1,60 +1,111 @@
 package com.example.savingtime.ui.savingPlan
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import com.example.savingtime.R
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.RecyclerView
+import com.example.savingtime.databinding.FragmentSavingPlanBinding
+import com.example.savingtime.db.SavingPlanDb
+import com.example.savingtime.db.SavingPlanEntity
+import com.example.savingtime.db.SavingPlanRepository
+import com.example.savingtime.ui.home.HomeViewModelFactory
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import java.text.NumberFormat
+import java.util.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class SavingPlanFragment : Fragment(), ItemClickListener {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [SavingPlanFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class SavingPlanFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+    private val viewModel: SavingPlanViewModel by lazy {
+        val db = SavingPlanDb.getInstance(requireContext())
+        val savingPlanRepository = SavingPlanRepository(db.dao)
+        val factory = SavingPlanViewModelFactory(savingPlanRepository)
+        ViewModelProvider(this, factory)[SavingPlanViewModel::class.java]
     }
+
+    private lateinit var binding: FragmentSavingPlanBinding
+    private lateinit var myAdapter: SavingPlanAdapter
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_saving_plan, container, false)
+        binding = FragmentSavingPlanBinding.inflate(layoutInflater, container, false)
+        setHasOptionsMenu(true)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment SavingPlanFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            SavingPlanFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        myAdapter = SavingPlanAdapter(this)
+        with (binding.recyclerView) {
+            addItemDecoration(DividerItemDecoration(context, RecyclerView.VERTICAL))
+            adapter = myAdapter
+            setHasFixedSize(true)
+        }
+        viewModel.data.observe(viewLifecycleOwner, {
+            binding.emptyView.visibility = if (it.isEmpty())
+                View.VISIBLE else View.GONE
+            myAdapter.submitList(it)
+        })
     }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.saving_plan_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.menu_hapus) {
+            hapusData()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun hapusData() {
+        MaterialAlertDialogBuilder(requireContext())
+            .setMessage(R.string.konfirmasi_hapus)
+            .setPositiveButton(getString(R.string.hapus)) { _, _ ->
+                viewModel.hapusData()
+            }
+            .setNegativeButton(getString(R.string.batal)) { dialog, _ ->
+                dialog.cancel()
+            }
+            .show()
+    }
+
+    override fun onItemClickDelete(item: SavingPlanEntity) {
+        MaterialAlertDialogBuilder(requireContext())
+            .setMessage(getString(R.string.hapus_satu))
+            .setPositiveButton(getString(R.string.hapus)) { _, _ ->
+                viewModel.hapusSavingPlan(item)
+            }
+            .setNegativeButton(getString(R.string.batal)) { dialog, _ ->
+                dialog.cancel()
+            }
+            .show()
+    }
+
+    override fun onItemClickSetorBulanan(id: Long, achievedAmount: Double, monthlyContribution: Double) {
+        val localeID = Locale("in", "ID")
+        val monthlyContributionString : String = NumberFormat.getCurrencyInstance(localeID).format(monthlyContribution)
+        MaterialAlertDialogBuilder(requireContext())
+            .setMessage("Setor tabungan untuk bulan ini sebesar: " + monthlyContributionString + " ?")
+            .setPositiveButton(getString(R.string.setor)) { _, _ ->
+                viewModel.setorBulanan(id, achievedAmount, monthlyContribution)
+            }
+            .setNegativeButton(getString(R.string.batal)) { dialog, _ ->
+                dialog.cancel()
+            }
+            .show()
+    }
+}
+
+interface ItemClickListener {
+    fun onItemClickDelete(item: SavingPlanEntity)
+
+    fun onItemClickSetorBulanan(id: Long, achievedAmount: Double, monthlyContribution: Double)
 }

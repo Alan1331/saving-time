@@ -153,14 +153,23 @@
 
         <Button
             android:id="@+id/calculate_button"
-            android:layout_width="0dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:text="@string/calculate"
             android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="@id/round_switch"
             app:layout_constraintStart_toStartOf="@id/round_switch"
             app:layout_constraintTop_toBottomOf="@id/round_switch"
             android:background="?attr/colorPrimary"/>
+
+        <Button
+            android:id="@+id/save_button"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="@string/save"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@id/round_switch"
+            app:layout_constraintTop_toBottomOf="@id/round_switch"
+            android:background="?attr/colorPrimary" />
 
         <TextView
             android:id="@+id/result"
@@ -168,7 +177,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="@id/calculate_button"
+            app:layout_constraintEnd_toEndOf="@id/save_button"
             app:layout_constraintStart_toStartOf="@id/calculate_button"
             app:layout_constraintTop_toBottomOf="@id/calculate_button"
             tools:text="Total uang yang akan terkumpul:\n Rp.1.000.000" />

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/descriptionTextView"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Tabungan untuk dana pendidikan" />
+
+    <TextView
+        android:id="@+id/monthlyContribution"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toStartOf="@+id/descriptionTextView"
+        app:layout_constraintTop_toBottomOf="@+id/descriptionTextView"
+        tools:text="Setoran bulanan: Rp. 125.000" />
+
+    <TextView
+        android:id="@+id/bunga"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        app:layout_constraintTop_toBottomOf="@id/monthlyContribution"
+        app:layout_constraintStart_toStartOf="@id/monthlyContribution"
+        tools:text="Bunga: 1.2%" />
+
+    <TextView
+        android:id="@+id/progres"
+        android:layout_width="380dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="@+id/bunga"
+        app:layout_constraintTop_toBottomOf="@+id/bunga"
+        tools:text="Progres: Rp.192.000 / Rp.1.256.200" />
+
+    <Button
+        android:id="@+id/setorButton"
+        android:layout_width="82dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="6dp"
+        android:background="?attr/colorPrimary"
+        app:layout_constraintStart_toEndOf="@id/monthlyContribution"
+        app:layout_constraintTop_toTopOf="@id/descriptionTextView"
+        app:layout_constraintBottom_toBottomOf="@id/bunga"
+        android:text="@string/setor" />
+
+    <ImageButton
+        android:id="@+id/deleteButton"
+        android:layout_width="40dp"
+        android:layout_height="0dp"
+        android:src="@drawable/ic_delete"
+        android:background="@drawable/custom_borderless_background"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:scaleType="centerInside"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintStart_toEndOf="@id/setorButton"
+        app:layout_constraintTop_toTopOf="@id/descriptionTextView"
+        app:layout_constraintBottom_toBottomOf="@id/bunga"
+        android:contentDescription="Delete button" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

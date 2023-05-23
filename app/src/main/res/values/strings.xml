@@ -6,6 +6,7 @@
     <string name="interest">Besar bunga (persen)</string>
     <string name="round_up">Bulatkan hasilnya?</string>
     <string name="calculate">Hitung</string>
+    <string name="save">Simpan</string>
     <string name="tip_amount">Total uang yang akan terkumpul: %s</string>
     <string name="invalid_monthly_contribution">Tabungan bulanan tidak boleh kosong.</string>
     <string name="invalid_duration">Durasi menabung tidak boleh kosong.</string>
@@ -19,4 +20,13 @@
         Copyright © 2023 Syekh Maulana Wijaya.\n
         All rights reserved.
     </string>
+    <string name="belum_ada_data">Anda tidak memiliki saving plan.\nSimpan hasil hitung pada home page untuk menambahkan saving plan!</string>
+    <string name="setor">Setor</string>
+    <string name="hapus_saving_plan">Hapus Saving Plan</string>
+    <string name="konfirmasi_hapus">Hapus semua histori?</string>
+    <string name="hapus">Hapus</string>
+    <string name="batal">Batal</string>
+    <string name="hapus_satu">Hapus Saving Plan ini?</string>
+    <string name="share_button">Bagikan Aplikasi</string>
+    <string name="share_message">Install aplikasi Saving Time kuy!!\nDengan aplikasi ini, masalah keuangan Anda dapat diatasi, karena aplikasi ini didesain untuk mempermudah Anda dalam menabung.\nDapatkan segera aplikasinya pada link berikut: https://github.com/Alan1331/saving-time.git</string>
 </resources>
