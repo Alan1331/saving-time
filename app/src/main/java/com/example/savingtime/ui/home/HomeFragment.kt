@@ -40,6 +40,14 @@ class HomeFragment : Fragment() {
     ): View? {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         setHasOptionsMenu(true)
+
+        // add action to navigate from home fragment into news fragment
+        binding.buttonToNews.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_homeFragment_to_newsFragment
+            )
+        }
+
         val view = binding.root
         return view
     }

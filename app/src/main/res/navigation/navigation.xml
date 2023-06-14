@@ -16,16 +16,24 @@
         <action
             android:id="@+id/action_homeFragment_to_savingPlanFragment"
             app:destination="@id/savingPlanFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_newsFragment"
+            app:destination="@id/newsFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/aboutFragment"
         android:name="com.example.savingtime.ui.about.AboutFragment"
-        android:label="About Saving Time" />
+        android:label="@string/label_fragment_about" />
 
     <fragment
         android:id="@+id/savingPlanFragment"
         android:name="com.example.savingtime.ui.savingPlan.SavingPlanFragment"
         android:label="@string/saving_plan" />
+    <fragment
+        android:id="@+id/newsFragment"
+        android:name="com.example.savingtime.ui.news.NewsFragment"
+        android:label="@string/label_fragment_berita_ekonomi"
+        tools:layout="@layout/fragment_news" />
 
 </navigation>
